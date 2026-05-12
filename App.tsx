@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import ColumnComponent from './components/Column';
-import AddTaskForm from './components/AddTaskForm';
-import { Task, Column } from './types';
+import { useState } from "react";
+import ColumnComponent from "./components/Column";
+import AddTaskForm from "./components/AddTaskForm";
+import { Task, Column } from "./types";
 
 export default function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -11,7 +11,7 @@ export default function App() {
     const newTask: Task = {
       id: `task-${Date.now()}`,
       title,
-      column: 'now',
+      column: "now",
       timestamp: new Date(),
     };
     setTasks([newTask, ...tasks]);
@@ -24,16 +24,16 @@ export default function App() {
   const moveTask = (taskId: string, targetColumn: Column) => {
     setTasks(
       tasks.map((task) =>
-        task.id === taskId ? { ...task, column: targetColumn } : task
-      )
+        task.id === taskId ? { ...task, column: targetColumn } : task,
+      ),
     );
     setDraggedTaskId(null);
   };
 
   const handleDragStart = (e: React.DragEvent, taskId: string) => {
     setDraggedTaskId(taskId);
-    e.dataTransfer.effectAllowed = 'move';
-    e.dataTransfer.setData('taskId', taskId);
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("taskId", taskId);
   };
 
   const getTasksByColumn = (column: Column) => {
@@ -60,7 +60,7 @@ export default function App() {
           <ColumnComponent
             title="Now"
             columnId="now"
-            tasks={getTasksByColumn('now')}
+            tasks={getTasksByColumn("now")}
             onTaskDelete={deleteTask}
             onTaskMove={moveTask}
             onDragStart={handleDragStart}
@@ -68,7 +68,7 @@ export default function App() {
           <ColumnComponent
             title="Soon"
             columnId="soon"
-            tasks={getTasksByColumn('soon')}
+            tasks={getTasksByColumn("soon")}
             onTaskDelete={deleteTask}
             onTaskMove={moveTask}
             onDragStart={handleDragStart}
@@ -76,7 +76,7 @@ export default function App() {
           <ColumnComponent
             title="Later"
             columnId="later"
-            tasks={getTasksByColumn('later')}
+            tasks={getTasksByColumn("later")}
             onTaskDelete={deleteTask}
             onTaskMove={moveTask}
             onDragStart={handleDragStart}
@@ -87,7 +87,8 @@ export default function App() {
         {tasks.length > 0 && (
           <div className="mt-8 p-4 bg-white rounded-lg border border-teal-100 text-center">
             <p className="text-teal-700 font-medium">
-              Total tasks: <span className="text-teal-900 font-bold">{tasks.length}</span>
+              Total tasks:{" "}
+              <span className="text-teal-900 font-bold">{tasks.length}</span>
             </p>
           </div>
         )}
